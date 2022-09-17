@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.wordle.FourLetterWordList.getRandomFourLetterWord
 import org.w3c.dom.Text
 
@@ -62,45 +63,47 @@ class MainActivity : AppCompatActivity() {
         val word3 = findViewById<TextView>(R.id.word3)
         val result = findViewById<TextView>(R.id.textView7)
         val editText = findViewById<EditText>(R.id.editText)
+        var guessCount = 0
 
         button.setOnClickListener{
 
-            var guesscount = 0
-            var correct = 1
             result.visibility = View.INVISIBLE
             result.text = wordToGuess
 
-            while(guesscount < 3 && correct == 1) {
-                if(guesscount == 0) {
-                    guess1.text = editText.text.toString()
-                    closeKeyboard(editText)
-                    word1.text = checkGuess(guess1.text.toString())
-                    if(word1.text == "OOOO") {
-                        correct = 0
-                    }
-                    guesscount += 1
+            if(guessCount == 0) {
+                guess1.text = editText.text.toString().uppercase()
+                closeKeyboard(editText)
+                editText.setText("")
+                word1.text = checkGuess(guess1.text.toString().uppercase())
+                if(word1.text == "OOOO") {
+                    Toast.makeText(applicationContext, "Great job!", Toast.LENGTH_SHORT).show()
                 }
-                else if(guesscount == 1) {
-                    guess2.text = editText.text.toString()
-                    closeKeyboard(editText)
-                    word2.text = checkGuess(guess2.text.toString())
-                    if(word2.text == "OOOO") {
-                        correct = 0
-                    }
-                    guesscount += 1
-                }
-                else if(guesscount == 2) {
-                    guess3.text = editText.text.toString()
-                    closeKeyboard(editText)
-                    word3.text = checkGuess(guess3.text.toString())
-                    if (word3.text == "OOOO") {
-                        correct = 0
-                    }
-                    guesscount += 1
-                }
+                guessCount += 1
             }
-            Toast.makeText(applicationContext, "Number of guesses exceeded", Toast.LENGTH_SHORT).show()
-            result.visibility = View.VISIBLE
+            else if(guessCount == 1) {
+                guess2.text = editText.text.toString().uppercase()
+                closeKeyboard(editText)
+                editText.setText("")
+                word2.text = checkGuess(guess2.text.toString().uppercase())
+                if(word2.text == "OOOO") {
+                    Toast.makeText(applicationContext, "Great job!", Toast.LENGTH_SHORT).show()
+                }
+                guessCount += 1
+            }
+            else if(guessCount == 2) {
+                guess3.text = editText.text.toString().uppercase()
+                closeKeyboard(editText)
+                editText.setText("")
+                word3.text = checkGuess(guess3.text.toString().uppercase())
+                if (word3.text == "OOOO") {
+                    Toast.makeText(applicationContext, "Great job!", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    button.isEnabled = false
+                    result.visibility = View.VISIBLE
+                }
+                guessCount += 1
+            }
         }
     }
 
