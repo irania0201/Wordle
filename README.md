@@ -32,7 +32,8 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src=walkthrough />
+<img src='walkthrough.gif' title='Correct Guess' width='' alt='Video Walkthrough' />
+<img src='walkthrough1.gif' title='Wrong Guess' width='' alt='Video Walkthrough' />
 
 <img src=walkthrough1 />
 <!-- Replace this with whatever GIF tool you used! -->
