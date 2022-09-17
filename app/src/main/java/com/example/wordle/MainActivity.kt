@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        updateText()
     }
 
     /**
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         val editText = findViewById<EditText>(R.id.editText)
 
         button.setOnClickListener{
+
             var guesscount = 0
             var correct = 1
             result.visibility = View.INVISIBLE
@@ -97,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                     guesscount += 1
                 }
             }
-            Toast.makeText(getApplicationContext(), "Number of guesses exceeded", Toast.LENGTH_SHORT).show();
+            Toast.makeText(applicationContext, "Number of guesses exceeded", Toast.LENGTH_SHORT).show()
             result.visibility = View.VISIBLE
         }
     }
